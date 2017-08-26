@@ -120,7 +120,14 @@ simplePLS <- function(obsData,smMatrix, mmMatrix, maxIt=300, stopCriterion=7){
 
     #Standarize Factor Scores
     fscores <- scale(fscores,TRUE,TRUE)
-
+##########
+    
+    #Save final SD and Mean of fscores
+    fscoresMeanData <- attr(fscores, "scaled:center")
+    fscoresSdData <- attr(fscores, "scaled:scale")
+    
+##########
+    
     #Save last outer_weights
     last_outer_weights <- outer_weights
 
@@ -253,7 +260,9 @@ simplePLS <- function(obsData,smMatrix, mmMatrix, maxIt=300, stopCriterion=7){
                    iterations = iterations,
                    weightDiff = weightDiff,
                    fscores = fscores,
-                   rSquared = rSquared)
+                   rSquared = rSquared,
+                   fscoresMeanData = fscoresMeanData,
+                   fscoresSdData = fscoresSdData)
 
   class(plsModel) <- "plsModel"
   return(plsModel)

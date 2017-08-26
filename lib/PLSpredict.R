@@ -18,6 +18,8 @@ PLSpredict <- function(trainData, testData, smMatrix, mmMatrix, maxIt=300, stopC
   meanData<-plsModel$meanData
   sdData <- plsModel$sdData
   path_coef<-plsModel$path_coef
+  fscoresSdData <- plsModel$fscoresSdData
+  fscoresMeanData <- plsModel$fscoresMeanData
   
   #Create container for Exogenous Variables
   exVariables = NULL
@@ -67,6 +69,14 @@ PLSpredict <- function(trainData, testData, smMatrix, mmMatrix, maxIt=300, stopC
   #Estimate Factor Scores from Inner Path and complete Matrix
   fscores <- fscores + fscores%*%path_coef
 
+######
+  #normalize fscores of predicted constructs
+  for (i in enVariables)
+  {
+    fscores[,i] <-(fscores[,i] - fscoresMeanData[i])/fscoresSdData[i]
+  }  
+######
+  
   #Predict Measurements with loadings
   predictedMeasurements<-fscores%*% t(outer_loadings)
 
