@@ -3,6 +3,7 @@ source("./lib/simplePLS.R")
 source("./lib/PLSpredict.R")
 source("./lib/predictionInterval.R")
 source("./lib/validatePredict.R")
+source("./lib/library.R")
 
 #Load Data
 Anime=read.csv("./data/AnimData.csv",header=T)
@@ -18,19 +19,19 @@ smMatrix <- matrix(c("PerceivedVisualComplexity", "ApproachAvoidance",
                    dimnames = list(1:2,c("source","target")))
 
 #Create the Matrix of the Measurement Model
-mmMatrix <- matrix(c("PerceivedVisualComplexity","VX.0","F",
-                     "PerceivedVisualComplexity","VX.1","F",
-                     "PerceivedVisualComplexity","VX.2","F",
-                     "PerceivedVisualComplexity","VX.3","F",
-                     "PerceivedVisualComplexity","VX.4","F",
-                     "Arousal","Aro1","F",
-                     "Arousal","Aro2","F",
-                     "Arousal","Aro3","F",
-                     "Arousal","Aro4","F",
-                     "ApproachAvoidance","AA.0","R",
-                     "ApproachAvoidance","AA.1","R",
-                     "ApproachAvoidance","AA.2","R",
-                     "ApproachAvoidance","AA.3","R"),nrow=13,ncol=3,byrow =TRUE,
+mmMatrix <- matrix(c("PerceivedVisualComplexity","VX.0","C",
+                     "PerceivedVisualComplexity","VX.1","C",
+                     "PerceivedVisualComplexity","VX.2","C",
+                     "PerceivedVisualComplexity","VX.3","C",
+                     "PerceivedVisualComplexity","VX.4","C",
+                     "Arousal","Aro1","C",
+                     "Arousal","Aro2","C",
+                     "Arousal","Aro3","C",
+                     "Arousal","Aro4","C",
+                     "ApproachAvoidance","AA.0","C",
+                     "ApproachAvoidance","AA.1","C",
+                     "ApproachAvoidance","AA.2","C",
+                     "ApproachAvoidance","AA.3","C"),nrow=13,ncol=3,byrow =TRUE,
                    dimnames = list(1:13,c("latent","measurement","type")))
 
 #Call PLS-PM Function to estimate model
